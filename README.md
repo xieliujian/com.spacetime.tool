@@ -1,1 +1,3 @@
-# com.spacetime.tool
+# 材质贴图替换编辑器
+
+# 材质编辑器
