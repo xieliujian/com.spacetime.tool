@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System.IO;
+using ST.Core;
 
-namespace gtm
+namespace ST.Tool
 {
     /// <summary>
     /// 
@@ -14,7 +15,7 @@ namespace gtm
         /// <summary>
         /// 
         /// </summary>
-        [MenuItem("gtm/Scene/²ÄÖÊÌùÍ¼Ìæ»»±à¼­Æ÷", false, 300)]
+        [MenuItem("SpaceTime/Tool/²ÄÖÊÌùÍ¼Ìæ»»±à¼­Æ÷", false, 300)]
         static void OnOpen()
         {
             MaterialTexReplaceEditor window = new MaterialTexReplaceEditor();
