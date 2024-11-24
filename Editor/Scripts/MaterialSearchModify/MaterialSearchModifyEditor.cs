@@ -13,10 +13,10 @@ namespace ST.Tool
         /// <summary>
         /// 
         /// </summary>
-        [MenuItem("gtm/Scene/²ÄÖÊ±à¼­Æ÷", false, 300)]
+        [MenuItem("SpaceTime/Tool/²ÄÖÊ±à¼­Æ÷", false, 300)]
         static void OnOpen()
         {
-            MaterialSearchModifyEditor window = new MaterialSearchModifyEditor();
+            MaterialSearchModifyEditor window = ScriptableObject.CreateInstance<MaterialSearchModifyEditor>();
             window.titleContent = new GUIContent("²ÄÖÊ±à¼­Æ÷");
             window.Show();
 

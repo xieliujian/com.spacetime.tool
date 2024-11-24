@@ -18,7 +18,7 @@ namespace ST.Tool
         [MenuItem("SpaceTime/Tool/²ÄÖÊÌùÍ¼Ìæ»»±à¼­Æ÷", false, 300)]
         static void OnOpen()
         {
-            MaterialTexReplaceEditor window = new MaterialTexReplaceEditor();
+            MaterialTexReplaceEditor window = ScriptableObject.CreateInstance<MaterialTexReplaceEditor>();
             window.titleContent = new GUIContent("²ÄÖÊÌùÍ¼Ìæ»»±à¼­Æ÷");
             window.Show();
         }
