@@ -1,0 +1,16 @@
+{
+    "name": "com.spacetime.tool.editor.test",
+    "rootNamespace": "",
+    "references": [
+        "GUID:193e723e1aba8c54da8956be6a1d03fc"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
