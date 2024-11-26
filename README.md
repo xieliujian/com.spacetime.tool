@@ -10,3 +10,6 @@
 
 [编辑器协程文档](https://github.com/xieliujian/com.spacetime.tool/blob/main/Markdown/EditorCoroutine.md)
 
+## 场景视图角色漫游 (适用于一边漫游，一边编辑场景)
+
+[场景视图角色漫游文档](https://zhuanlan.zhihu.com/p/606785263)
