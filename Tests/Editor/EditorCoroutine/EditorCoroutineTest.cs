@@ -14,7 +14,7 @@ namespace ST.Tool.Test
         /// <summary>
         /// 
         /// </summary>
-        [MenuItem("SpaceTime/Test/EditorCoroutineTest")]
+        [MenuItem("SpaceTime/Test/Tool/EditorCoroutineTest")]
         static void Test()
         {
             EditorCoroutine.StartEditorCoroutine(CountToTenCoroutine());
