@@ -1,4 +1,4 @@
-﻿using UnityEditor;
+using UnityEditor;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using ST.Core;
 namespace ST.Tool
 {
     /// <summary>
-    /// 
+    /// 材质属性修改类型：Float、Int、Vector、Color。
     /// </summary>
     public enum MaterialSearchModifyMatType
     {
@@ -19,7 +19,7 @@ namespace ST.Tool
     }
 
     /// <summary>
-    /// 
+    /// 材质搜索模式：不过滤、按 Keyword 过滤、按属性值过滤。
     /// </summary>
     public enum MaterialSearchModifySearchType
     {
@@ -29,27 +29,27 @@ namespace ST.Tool
     }
 
     /// <summary>
-    /// 
+    /// 材质分组：将材质列表按固定数量分页，便于编辑器窗口分批显示与操作。
     /// </summary>
     public class MaterialSearchModifyMatGroup
     {
         /// <summary>
-        /// 
+        /// 当前分组的索引。
         /// </summary>
         public int groupIndx;
 
         /// <summary>
-        /// 
+        /// 本组包含的材质列表。
         /// </summary>
         public List<Material> matList = new List<Material>();
 
         /// <summary>
-        /// 
+        /// 当前在编辑器中选中的材质索引。
         /// </summary>
         public int curMatIndex;
 
         /// <summary>
-        /// 
+        /// 本组中材质的总数量。
         /// </summary>
         public int matCount
         {
@@ -57,7 +57,7 @@ namespace ST.Tool
         }
 
         /// <summary>
-        /// 
+        /// 将当前选中材质索引重置为 0。
         /// </summary>
         public void Reset()
         {
@@ -65,9 +65,9 @@ namespace ST.Tool
         }
 
         /// <summary>
-        /// 
+        /// 向本组追加一个材质。
         /// </summary>
-        /// <param name="mat"></param>
+        /// <param name="mat">要追加的材质。</param>
         public void AddMat(Material mat)
         {
             matList.Add(mat);
@@ -75,62 +75,63 @@ namespace ST.Tool
     }
 
     /// <summary>
-    /// 
+    /// 某个 Shader 下所有材质的管理器：维护全量分组列表及按 Keyword/属性值筛选后的分组列表，
+    /// 支持批量修改 Keyword 开关与材质属性值。
     /// </summary>
     public class MaterialSearchModifyMatList
     {
         /// <summary>
-        /// 
+        /// 每个分组最多容纳的材质数量。
         /// </summary>
         public const int GROUP_MAT_NUM = 100;
 
         /// <summary>
-        /// 
+        /// Keyword 列表输入时的分隔符（空格）。
         /// </summary>
         const char STR_KEYWORD_ARRAY_SPLIT = ' ';
 
         /// <summary>
-        /// 
+        /// 材质属性值各分量输入时的分隔符（逗号）。
         /// </summary>
         const char STR_MAT_PROPERTY_SPLIT = ',';
 
         /// <summary>
-        /// 
+        /// 本列表对应的 Shader。
         /// </summary>
         public Shader shader;
 
         /// <summary>
-        /// 
+        /// 该 Shader 下的所有材质。
         /// </summary>
         public List<Material> matList = new List<Material>();
 
         /// <summary>
-        /// 
+        /// 全量材质的分组列表。
         /// </summary>
         public List<MaterialSearchModifyMatGroup> groupList = new List<MaterialSearchModifyMatGroup>();
 
         /// <summary>
-        /// 
+        /// 按 Keyword 筛选后的分组列表。
         /// </summary>
         public List<MaterialSearchModifyMatGroup> groupListByKeyword = new List<MaterialSearchModifyMatGroup>();
 
         /// <summary>
-        /// 
+        /// 按属性值筛选后的分组列表。
         /// </summary>
         public List<MaterialSearchModifyMatGroup> groupListByProperty = new List<MaterialSearchModifyMatGroup>();
 
         /// <summary>
-        /// 
+        /// 当前选中的分组索引。
         /// </summary>
         public int curGroupIndex;
 
         /// <summary>
-        /// 
+        /// 当前搜索模式。
         /// </summary>
         public MaterialSearchModifySearchType searchType = MaterialSearchModifySearchType.None;
 
         /// <summary>
-        /// 
+        /// 获取当前搜索模式下的材质总数。
         /// </summary>
         public int GetMatNum()
         {
@@ -147,9 +148,9 @@ namespace ST.Tool
         }
 
         /// <summary>
-        /// 
+        /// 获取当前搜索模式下的分组总数。
         /// </summary>
-        /// <returns></returns>
+        /// <returns>当前分组列表的数量。</returns>
         public int GetGroupNum()
         {
             var groupList = GetGroupList();
@@ -158,7 +159,7 @@ namespace ST.Tool
         }
 
         /// <summary>
-        /// 
+        /// 重置当前分组选中索引并清除搜索状态，回到全量视图。
         /// </summary>
         public void Reset()
         {
@@ -173,9 +174,9 @@ namespace ST.Tool
         }
 
         /// <summary>
-        /// 
+        /// 根据当前 <see cref="searchType"/> 返回对应的分组列表。
         /// </summary>
-        /// <returns></returns>
+        /// <returns>当前激活的分组列表。</returns>
         public List<MaterialSearchModifyMatGroup> GetGroupList()
         {
             List <MaterialSearchModifyMatGroup> _groupList = null;
@@ -197,9 +198,9 @@ namespace ST.Tool
         }
 
         /// <summary>
-        /// 
+        /// 返回当前选中的分组，索引越界时返回 <c>null</c>。
         /// </summary>
-        /// <returns></returns>
+        /// <returns>当前分组或 <c>null</c>。</returns>
         public MaterialSearchModifyMatGroup GetCurGroup()
         {
             var _groupList = GetGroupList();
@@ -211,10 +212,10 @@ namespace ST.Tool
         }
 
         /// <summary>
-        /// 
+        /// 将材质追加到指定分组列表，超出 <see cref="GROUP_MAT_NUM"/> 上限时自动创建新分组。
         /// </summary>
-        /// <param name="mat"></param>
-        /// <param name="groupList"></param>
+        /// <param name="mat">要追加的材质。</param>
+        /// <param name="_groupList">目标分组列表。</param>
         public void AddMat(Material mat, List<MaterialSearchModifyMatGroup> _groupList)
         {
             MaterialSearchModifyMatGroup group = null;
@@ -241,8 +242,9 @@ namespace ST.Tool
 
 
         /// <summary>
-        /// 
+        /// 将材质追加到全量列表及全量分组中。
         /// </summary>
+        /// <param name="mat">要追加的材质。</param>
         public void AddMat(Material mat)
         {
             matList.Add(mat);
@@ -251,9 +253,9 @@ namespace ST.Tool
         }
 
         /// <summary>
-        /// 
+        /// 按空格分隔的 Keyword 集合筛选同时包含所有关键字的材质，结果存入 <see cref="groupListByKeyword"/>。
         /// </summary>
-        /// <param name="matKeywordSel"></param>
+        /// <param name="matKeywordSel">空格分隔的 Keyword 列表字符串。</param>
         public void SearchAllMaterialByKeywordList(string matKeywordSel)
         {
             if (string.IsNullOrEmpty(matKeywordSel))
@@ -302,11 +304,11 @@ namespace ST.Tool
         }
 
         /// <summary>
-        /// 
+        /// 批量设置指定分组列表中所有材质的 Shader Keyword 开关，并显示进度条。
         /// </summary>
-        /// <param name="strMatKeywordName"></param>
-        /// <param name="strKeywordOn"></param>
-        /// <param name="_groupList"></param>
+        /// <param name="strMatKeywordName">Keyword 名称。</param>
+        /// <param name="strKeywordOn">大于 0 表示开启，否则关闭。</param>
+        /// <param name="_groupList">要操作的分组列表。</param>
         void SetAllMaterialKeyword(string strMatKeywordName, string strKeywordOn, List<MaterialSearchModifyMatGroup> _groupList)
         {
             for (int m = 0; m < _groupList.Count; m++)
@@ -347,7 +349,7 @@ namespace ST.Tool
         }
 
         /// <summary>
-        /// 
+        /// 遍历全量材质，移除每个材质中在 Shader 各 PassType 下均无效的 Keyword。
         /// </summary>
         public void SkipAllMatUnvalidKeyword()
         {
@@ -416,10 +418,11 @@ namespace ST.Tool
         }
 
         /// <summary>
-        /// 
+        /// 检查指定 Keyword 在给定材质的 Shader 各 PassType 中是否有效。
         /// </summary>
-        /// <param name="keyword"></param>
-        /// <returns></returns>
+        /// <param name="mat">目标材质。</param>
+        /// <param name="keyword">要验证的 Keyword 字符串。</param>
+        /// <returns>至少有一个 PassType 支持该 Keyword 则返回 <c>true</c>。</returns>
         public static bool IsKeywordValid(Material mat, string keyword)
         {
             for (int i = (int)PassType.Normal; i <= (int)PassType.ScriptableRenderPipelineDefaultUnlit; ++i)
@@ -437,8 +440,10 @@ namespace ST.Tool
         }
 
         /// <summary>
-        /// 
+        /// 对当前搜索模式下的所有材质批量设置 Keyword 开关。
         /// </summary>
+        /// <param name="strMatKeywordName">Keyword 名称。</param>
+        /// <param name="strKeywordOn">大于 0 表示开启，否则关闭。</param>
         public void SetAllMaterialKeyword(string strMatKeywordName, string strKeywordOn)
         {
             if (string.IsNullOrEmpty(strMatKeywordName) || string.IsNullOrEmpty(strKeywordOn))
@@ -449,12 +454,12 @@ namespace ST.Tool
         }
 
         /// <summary>
-        /// 
+        /// 批量设置指定分组列表中所有材质的属性值（支持 Float、Int、Vector、Color），并显示进度条。
         /// </summary>
-        /// <param name="strMatPropertyName"></param>
-        /// <param name="matPropertyType"></param>
-        /// <param name="strMatPropertyVal"></param>
-        /// <param name="_groupList"></param>
+        /// <param name="strMatPropertyName">属性名称。</param>
+        /// <param name="matPropertyType">属性类型。</param>
+        /// <param name="strMatPropertyVal">属性值字符串（Vector/Color 用逗号分隔四个分量）。</param>
+        /// <param name="_groupList">要操作的分组列表。</param>
         void SetAllMaterialProperty(string strMatPropertyName, MaterialSearchModifyMatType matPropertyType, string strMatPropertyVal,
             List<MaterialSearchModifyMatGroup> _groupList)
         {
@@ -530,11 +535,11 @@ namespace ST.Tool
         }
 
         /// <summary>
-        /// 
+        /// 按属性名称、类型与值筛选匹配的材质，结果存入 <see cref="groupListByProperty"/>。
         /// </summary>
-        /// <param name="strMatPropertyName"></param>
-        /// <param name="matPropertyType"></param>
-        /// <param name="strMatPropertyVal"></param>
+        /// <param name="strMatPropertyName">属性名称。</param>
+        /// <param name="matPropertyType">属性类型。</param>
+        /// <param name="strMatPropertyVal">目标属性值字符串。</param>
         public void SearchAllMaterialByProperty(string strMatPropertyName, MaterialSearchModifyMatType matPropertyType, string strMatPropertyVal)
         {
             Reset();
@@ -624,8 +629,11 @@ namespace ST.Tool
         }
 
         /// <summary>
-        /// 
+        /// 对当前搜索模式下的所有材质批量设置属性值。
         /// </summary>
+        /// <param name="strMatPropertyName">属性名称。</param>
+        /// <param name="matPropertyType">属性类型。</param>
+        /// <param name="strMatPropertyVal">目标属性值字符串。</param>
         public void SetAllMaterialProperty(string strMatPropertyName, MaterialSearchModifyMatType matPropertyType, string strMatPropertyVal)
         {
             if (string.IsNullOrEmpty(strMatPropertyName) || string.IsNullOrEmpty(strMatPropertyVal))
@@ -638,17 +646,18 @@ namespace ST.Tool
     }
 
     /// <summary>
-    /// 
+    /// 材质搜索与批量修改的入口：维护 Shader → <see cref="MaterialSearchModifyMatList"/> 的字典，
+    /// 供编辑器窗口查询与操作。
     /// </summary>
     public class MaterialSearchModify
     {
         /// <summary>
-        /// 
+        /// 以 Shader 为键、对应材质管理器为值的字典。
         /// </summary>
         static Dictionary<Shader, MaterialSearchModifyMatList> s_ShaderDict = new Dictionary<Shader, MaterialSearchModifyMatList>();
 
         /// <summary>
-        /// 
+        /// 对外暴露的 Shader 字典只读访问器。
         /// </summary>
         public static Dictionary<Shader, MaterialSearchModifyMatList> shaderDict
         {
@@ -656,7 +665,7 @@ namespace ST.Tool
         }
 
         /// <summary>
-        /// 
+        /// 清空 Shader 字典。
         /// </summary>
         public static void Clear()
         {
@@ -664,7 +673,7 @@ namespace ST.Tool
         }
 
         /// <summary>
-        /// 
+        /// 扫描工程内所有 <c>.mat</c> 文件，重新构建 Shader → 材质列表 的字典。
         /// </summary>
         public static void RefreshShaderList()
         {
