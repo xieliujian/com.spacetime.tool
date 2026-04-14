@@ -13,9 +13,9 @@
 
 | 窗口 | 菜单路径 |
 |---|---|
-| 规则管理面板 | `MHT/ResTools/ResRulePanel` |
-| 资源查询面板 | `MHT/ResTools/ResCheckPanel` |
-| 清空视图缓存 | `MHT/ResTools/ClearViewDataCache` |
+| 规则管理面板 | `SpaceTime/ResTools/ResRulePanel` |
+| 资源查询面板 | `SpaceTime/ResTools/ResCheckPanel` |
+| 清空视图缓存 | `SpaceTime/ResTools/ClearViewDataCache` |
 
 ---
 
