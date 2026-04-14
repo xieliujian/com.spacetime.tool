@@ -95,6 +95,6 @@ com.spacetime.tool/
 
 ## 注意事项
 
-- `ResRuleDefine.cs` 中的路径常量（`RULE_PROJECT_DIR`、`RULE_TEMPLATE_DIR`）仍为硬编码的旧项目路径，实际使用时需按项目调整
+- `ResRuleDefine.cs` 中的路径常量指向 `Assets/SpaceTime/ResTools/EditorConfig/...`，模板文件（template.png/mp3/FBX）需存放于该目录
 - `Menu.cs` 中菜单路径为 `SpaceTime/ResTools/...`，与其他工具保持一级菜单统一
 - 场景漫游功能同时有 Editor 和 Runtime 代码，Runtime 部分通过 `#if UNITY_EDITOR` 条件编译引用编辑器 API

@@ -9,12 +9,12 @@ namespace ST.Tool
         public const string CHECK_NORMAL_DIR = "Assets";
 
         /// <summary> 规则工具路径 </summary>
-        public const string RULE_TOOL_DIR = "Assets/LingRen/Script/ResTools";
+        public const string RULE_TOOL_DIR = "Assets/SpaceTime/ResTools";
 
         /// <summary> 规则项目路径 </summary>
-        public const string RULE_PROJECT_DIR = "Assets/LingRen/Script/ResTools/EditorConfig/Projects";
+        public const string RULE_PROJECT_DIR = "Assets/SpaceTime/ResTools/EditorConfig/Projects";
 
         /// <summary> 模板文件路径 </summary>
-        public const string RULE_TEMPLATE_DIR = "Assets/LingRen/Script/ResTools/EditorConfig/ResTemplate";
+        public const string RULE_TEMPLATE_DIR = "Assets/SpaceTime/ResTools/EditorConfig/ResTemplate";
     }
 }

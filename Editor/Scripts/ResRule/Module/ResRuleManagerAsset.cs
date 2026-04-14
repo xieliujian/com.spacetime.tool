@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace ST.Tool
 {
-    [CreateAssetMenu(menuName = "MHT/ResRule/CreateResRuleManagerAsset")]
+    [CreateAssetMenu(menuName = "SpaceTime/ResRule/CreateResRuleManagerAsset")]
     internal partial class ResRuleManagerAsset : ScriptableObject
     {
         public List<ResRuleData> ruleDataList;
