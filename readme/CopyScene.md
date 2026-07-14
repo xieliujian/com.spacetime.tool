@@ -4,7 +4,7 @@
 
 ## 说明
 
-![GitHub](https://github.com/xieliujian/UnityDemo_CopyScene/blob/main/Video/1.png?raw=true)
+![CopyScene](tex/CopyScene.png)
 
 复制场景，例如把场景从10001复制到10002, 对于场景文件夹内的内容，为了避免引用旧资源，需要用代码复制
 
